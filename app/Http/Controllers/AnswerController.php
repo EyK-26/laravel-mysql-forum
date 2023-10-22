@@ -32,8 +32,7 @@ class AnswerController extends Controller
 
         $answer->user_id = $user_id;
         $answer->save();
-        session()->flash('success', 'answer created');
-        return redirect()->route('questions.show', $answer->question->id);
+        return redirect()->route('questions.show', $answer->question->id)->with('success', 'answer has been added');;
     }
 
     // public function show(string $id)
@@ -62,7 +61,7 @@ class AnswerController extends Controller
 
         $answer->save();
         session()->flash('success', 'answer edited');
-        return redirect()->route('questions.show', $answer->question->id);
+        return redirect()->route('questions.show', $answer->question->id)->with('success', 'answer has been updated');;
     }
 
     public function destroy(string $id)
@@ -71,7 +70,7 @@ class AnswerController extends Controller
         $question_id = $answer->question_id;
         $answer->delete();
         session()->flash('success', 'answer deleted');
-        return redirect()->route('questions.show', $question_id);
+        return redirect()->route('questions.show', $question_id)->with('success', 'answer has been deleted');
     }
 
     public function destroyAll(string $id): void

@@ -53,7 +53,6 @@ class UserController extends Controller
             $questionController->destroy($question->id);
         }
 
-        session()->flash('success', 'User deleted');
-        return redirect()->route('questions.index');
+        return redirect()->route('questions.index')->with('success', 'profile has been updated');
     }
 }
