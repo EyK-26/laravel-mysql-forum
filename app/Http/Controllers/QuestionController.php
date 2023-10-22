@@ -34,7 +34,6 @@ class QuestionController extends Controller
         $question->user_id = $user_id;
         $question->save();
 
-        session()->flash('success', 'Question created');;
         return redirect()->route('questions.show', $question->id)->with('success', 'Question created');
     }
 
