@@ -73,8 +73,11 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($id);
         $question->delete();
-        session()->flash('success', 'Question deleted');
-        return redirect()->route('questions.index');
+
+        $answer = new AnswerController();
+        $answer->destroyAll($id);
+
+        return redirect()->route('questions.index')->with('success', 'Question deleted');
     }
 
     private function validateQuestion(Request $request)

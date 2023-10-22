@@ -198,3 +198,7 @@ footer {
 svg {
     width: 1%;
 }
+
+html {
+    min-height: 100vh;
+}

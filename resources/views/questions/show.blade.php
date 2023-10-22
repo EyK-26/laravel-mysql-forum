@@ -1,16 +1,20 @@
 @extends('layouts.layout')
 
+@if (\Session::has('success'))
+<div class="alert alert-success">
+    <ul>
+        <li>{!! \Session::get('success') !!}</li>
+    </ul>
+</div>
+@endif
+
 @section('content')
 <section id="banner">
     <div class="container">
         <h1>Question</h1>
     </div>
 </section>
-@include('components.messages')
-@if (session('success'))
-<h3 style="color: green;">{{ session('status') }}</h3>
-@endif
-<hr>
+
 @if($question->id)
 <section id="question">
     <div class="container">
@@ -28,14 +32,18 @@
             <hr>
             <div style="display: flex; align-items: center; justify-content: center; flex-direction:column">
                 <a href="{{ route('questions.edit', $question->id ) }}">Edit Your Question</a>
-                <a href="{{ route('questions.destroy', $question->id ) }}">Delete Your Question</a>
+                <form action="{{ route('questions.destroy', $question->id ) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">delete your question</button>
+                </form>
             </div>
         </div>
     </div>
 </section>
-
+@include('answers.create')
 @if ($question->answers->count() > 0)
-@include('questions.answers')
+@include('answers.answers')
 @else
 <div>
     <p>No Answer Yet</p>

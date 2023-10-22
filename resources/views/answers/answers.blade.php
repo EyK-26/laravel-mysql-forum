@@ -1,6 +1,7 @@
 <section id="answers">
     <div class="container">
         <h2>{{ $question->answers->count() }} {{ $question->answers->count() > 1 ? "Answers" : "Answer" }}</h2>
+
         @foreach ($question->answers as $answer)
         <div class="answer">
             <div class="answer-right">
@@ -15,12 +16,15 @@
                         }}</a></div>
                 <hr>
                 <div style="display: flex; align-items: center; justify-content: center; flex-direction:column">
-                    <a href="{{ route('answers.edit', $answer->id ) }}">Edit Your Question</a>
-                    <a href="{{ route('answers.destroy', $answer->id ) }}">Delete Your Question</a>
+                    <a href="{{ route('answers.edit', $answer->id ) }}">Edit Your Answer</a>
+                    <form action="{{ route('answers.destroy', $answer->id ) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">delete your answer</button>
+                    </form>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
-    @include('answers.create_edit')
 </section>

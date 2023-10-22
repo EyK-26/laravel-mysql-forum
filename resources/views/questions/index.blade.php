@@ -1,5 +1,13 @@
 @extends('layouts.layout')
 
+@if (\Session::has('success'))
+<div class="alert alert-success">
+    <ul>
+        <li>{!! \Session::get('success') !!}</li>
+    </ul>
+</div>
+@endif
+
 @section('content')
 <section id="banner">
     <div class="container">
@@ -32,6 +40,8 @@
         @endforeach
         {{ $questions->links() }}
         {{-- {{ $owners->appends(request()->input())->links() }} --}}
+        @else
+        <p style="text-align: center;">No Questions Yet</p>
         @endif
     </div>
 </section>

@@ -1,5 +1,13 @@
 @extends('layouts.layout')
 
+@if (\Session::has('success'))
+<div class="alert alert-success">
+    <ul>
+        <li>{!! \Session::get('success') !!}</li>
+    </ul>
+</div>
+@endif
+
 @section('content')
 @if ($user->id)
 <section id="question">
@@ -14,6 +22,12 @@
                     src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/user-male-icon.png" />
             </div>
         </div>
+        <a href="{{ route('users.edit', $user->id) }}">Edit user details</a>
+        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="delete user">
+        </form>
     </div>
 </section>
 @endif
