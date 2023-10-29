@@ -3,10 +3,16 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = Auth::user();
+    if ($user) {
+        return view('welcome', compact('user'));
+    } else {
+        return view('welcome');
+    }
 });
 
 Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');

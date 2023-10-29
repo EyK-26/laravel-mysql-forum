@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
@@ -27,9 +28,8 @@ class AnswerController extends Controller
         $answer = new Answer();
         $answer->fill($request->all());
 
-        $user = new UserController();
-        $user_id = $user->store($request->input('name'), $request->input('email'));
 
+        $user_id = Auth::user()->id;
         $answer->user_id = $user_id;
         $answer->save();
         return redirect()->route('questions.show', $answer->question->id)->with('success', 'answer has been added');;
@@ -53,13 +53,8 @@ class AnswerController extends Controller
         $answer = Answer::findOrFail($id);
         $answer->text = $request->input('text');
 
-        $user_id = $answer->user_id;
-        $user = User::findOrFail($user_id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->save();
-
         $answer->save();
+
         session()->flash('success', 'answer edited');
         return redirect()->route('questions.show', $answer->question->id)->with('success', 'answer has been updated');;
     }
@@ -85,8 +80,6 @@ class AnswerController extends Controller
     {
         $this->validate($request, [
             "text" => "required",
-            "name" => "required",
-            "email" => "required|email",
         ]);
     }
 }

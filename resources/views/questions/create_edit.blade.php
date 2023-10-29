@@ -29,12 +29,7 @@ $style ="margin: 2em; text-align: center;";
             placeholder="enter your question here">{{ old('text', $question->text) }}</textarea>
         <br>
         <br>
-        <input type="text" name="name" id="name" placeholder="your user name"
-            value="{{ old('name', $question->user->name ?? null) }}">
-        <br>
-        <br>
-        <input type="email" name="email" id="email" placeholder="your email address"
-            value="{{ old('email', $question->user->email ?? null) }}">
+        <small>your username will appear as {{$user}}</small>
         <br>
         <br>
         <button type="submit">Submit</button>

@@ -185,20 +185,79 @@
 }
 
 footer {
-    margin-top: 2rem;
-    padding: 1rem 0.3rem;
+    padding: 0.5rem 0.3rem;
     background-color: #242729;
     color: #6a737c;
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 60px;
+    height: 45px;
 }
 
 svg {
     width: 1%;
 }
 
-html {
+html,
+body {
     min-height: 100vh;
+    background-color: #fff;
+    color: #636b6f;
+    font-family: "Nunito", sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+input {
+    margin: 1em;
+    width: 25em;
+}
+
+button {
+    width: 15em;
+    padding: 0.2em 1em 0.2em 1em;
+    margin: 0.5em auto;
 }

@@ -1,20 +1,12 @@
 @extends('layouts.layout')
 
-@if (\Session::has('success'))
-<div class="alert alert-success">
-    <ul>
-        <li>{!! \Session::get('success') !!}</li>
-    </ul>
-</div>
-@endif
-
 @section('content')
 <section id="banner">
     <div class="container">
         <h1>Question</h1>
     </div>
 </section>
-
+@include('components.messages')
 @if($question->id)
 <section id="question">
     <div class="container">
@@ -30,6 +22,7 @@
             <div class="user-name">by <a href="{{ route('users.show', $question->user->id)}}">{{ $question->user->name
                     }}</a></div>
             <hr>
+            @if ($question->user->id === auth()->user()->id)
             <div style="display: flex; align-items: center; justify-content: center; flex-direction:column">
                 <a href="{{ route('questions.edit', $question->id ) }}">Edit Your Question</a>
                 <form action="{{ route('questions.destroy', $question->id ) }}" method="post">
@@ -38,10 +31,11 @@
                     <button type="submit">delete your question</button>
                 </form>
             </div>
+            @endif
         </div>
     </div>
 </section>
-@include('answers.create')
+
 @if ($question->answers->count() > 0)
 @include('answers.answers')
 @else
@@ -49,6 +43,12 @@
     <p>No Answer Yet</p>
 </div>
 @endif
+
 @endif
+
+@if ($question->user->id !== auth()->user()->id)
+@include('answers.create')
+@endif
+
 
 @endsection

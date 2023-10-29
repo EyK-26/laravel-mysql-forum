@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -17,8 +18,9 @@ class QuestionController extends Controller
 
     public function create()
     {
+        $user = Auth::user()->name;
         $question = new Question();
-        return view("questions.create_edit", compact("question"));
+        return view("questions.create_edit", compact("question", "user"));
     }
 
     public function store(Request $request)
@@ -28,9 +30,7 @@ class QuestionController extends Controller
         $question = new Question();
         $question->fill($request->all());
 
-        $user = new UserController();
-        $user_id = $user->store($request->input('name'), $request->input('email'));
-
+        $user_id = Auth::user()->id;
         $question->user_id = $user_id;
         $question->save();
 
@@ -45,8 +45,9 @@ class QuestionController extends Controller
 
     public function edit(string $id)
     {
+        $user = Auth::user()->name;
         $question = Question::findOrFail($id);
-        return view('questions.create_edit', compact('question'));
+        return view('questions.create_edit', compact('question', "user"));
     }
 
     public function update(Request $request, string $id)
@@ -54,12 +55,6 @@ class QuestionController extends Controller
         $this->validateQuestion($request);
 
         $question = Question::findOrFail($id);
-
-        $user_id = $question->user_id;
-        $user = User::findOrFail($user_id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->save();
 
         $question->fill($request->all());
         $question->save();
@@ -84,8 +79,6 @@ class QuestionController extends Controller
         $this->validate($request, [
             "title" => "required",
             "text" => "required",
-            "name" => "required",
-            "email" => "required|email"
         ]);
     }
 }
