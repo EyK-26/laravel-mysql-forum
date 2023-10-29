@@ -16,12 +16,14 @@
                     src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/user-male-icon.png" />
             </div>
         </div>
+        @if ($user->id === auth()->user()->id)
         <a href="{{ route('users.edit', $user->id) }}">Edit user details</a>
         <form action="{{ route('users.destroy', $user->id) }}" method="post">
             @csrf
             @method('DELETE')
-            <input type="submit" value="delete user">
+            <input type="submit" value="delete your account">
         </form>
+        @endif
     </div>
 </section>
 @endif

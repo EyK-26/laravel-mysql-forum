@@ -9,18 +9,15 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('admin.users.index', compact("users"));
+    }
     public function show(string $id)
     {
         $user = User::findOrFail($id);
         return view('users.show', compact("user"));
-    }
-    public function store($name, $email)
-    {
-        $user = new User();
-        $user->name = $name;
-        $user->email = $email;
-        $user->save();
-        return $user->id;
     }
 
     public function edit(string $id)
@@ -52,7 +49,7 @@ class UserController extends Controller
             $questionController = new QuestionController;
             $questionController->destroy($question->id);
         }
-
-        return redirect()->route('questions.index')->with('success', 'profile has been updated');
+        session()->flash('success', 'Question deleted');
+        return redirect()->route('questions.index');
     }
 }

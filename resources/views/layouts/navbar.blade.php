@@ -9,6 +9,9 @@
             @auth
             <a class="nav-item nav-link" href="{{ route('questions.index') }}">Questions</a>
             <a class="nav-item nav-link" href="{{ route('questions.create') }}">Ask a question</a>
+            @can('admin')
+            <a class="nav-item nav-link" href="{{ route('users.index') }}">List of users </a>
+            @endcan
             @include('auth.logout')
             @endauth
         </div>

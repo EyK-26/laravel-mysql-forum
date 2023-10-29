@@ -12,7 +12,6 @@ $style ="margin: 2em; text-align: center;";
         @endif
     </div>
 </section>
-@include('components.messages');
 <hr>
 @if ($question->id)
 <form action="{{ route('questions.update', $question->id) }}" method="post" style="{{ $style }}">

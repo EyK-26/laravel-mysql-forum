@@ -1,7 +1,5 @@
 @extends('layouts.layout')
 
-@include('components.messages')
-
 @section('content')
 <section id="banner">
     <div class="container">
@@ -33,7 +31,6 @@
         </div>
         @endforeach
         {{ $questions->links() }}
-        {{-- {{ $owners->appends(request()->input())->links() }} --}}
         @else
         <p style="text-align: center;">No Questions Yet</p>
         @endif

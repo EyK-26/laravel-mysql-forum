@@ -33,3 +33,5 @@ Route::get('/users/{user}', [UserController::class, 'show'])->whereNumber('user'
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->whereNumber('user')->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->whereNumber('user')->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->whereNumber('user')->name('users.destroy');
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('can:admin');

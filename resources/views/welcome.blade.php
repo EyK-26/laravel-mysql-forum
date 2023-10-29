@@ -15,8 +15,7 @@
 <body>
     @include('components.messages')
     <div class="flex-center position-ref full-height">
-        <div class="top-right links" style="background-color: rgb(46, 45, 45); color:white; width: 100%; padding: 2em;">
-            <a href=" {{ url('/') }}">Home</a>
+        <div class="top-right links">
             @if (Route::has('login') && !auth()->check())
             <a href="{{ route('login') }}">Login</a>
             @endif
@@ -24,8 +23,6 @@
             <a href="{{ route('register') }}">Register</a>
             @endif
         </div>
-
-
 
         <div class="content">
             @auth

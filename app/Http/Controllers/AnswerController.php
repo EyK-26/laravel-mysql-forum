@@ -9,18 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
-    // public function index()
-    // {
-    //     $answer = Answer::orderBy("updated_at")->paginate(10);
-    //     return view("answers.index", compact("answer"));
-    // }
-
-    // public function create()
-    // {
-    //     $answer = new Answer();
-    //     return view("answers.store", compact("answer"));
-    // }
-
     public function store(Request $request)
     {
         $this->validateanswer($request);
@@ -34,12 +22,6 @@ class AnswerController extends Controller
         $answer->save();
         return redirect()->route('questions.show', $answer->question->id)->with('success', 'answer has been added');;
     }
-
-    // public function show(string $id)
-    // {
-    //     $answer = Answer::findOrFail($id);
-    //     return view('answers.show', compact('answer'));
-    // }
 
     public function edit(string $id)
     {
@@ -64,7 +46,6 @@ class AnswerController extends Controller
         $answer = Answer::findOrFail($id);
         $question_id = $answer->question_id;
         $answer->delete();
-        session()->flash('success', 'answer deleted');
         return redirect()->route('questions.show', $question_id)->with('success', 'answer has been deleted');
     }
 
@@ -74,6 +55,7 @@ class AnswerController extends Controller
         foreach ($answers as $answer) {
             $answer->delete();
         }
+        session()->flash('success', 'question and all related answers are deleted');
     }
 
     private function validateAnswer(Request $request)

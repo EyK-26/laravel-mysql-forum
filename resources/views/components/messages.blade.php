@@ -8,8 +8,8 @@
 </div>
 @endif
 
-@if(Session::has('success_message'))
+@if(Session::has('success'))
 <div class="alert alert-success" style="color: green;">
-    {{ Session::get('success_message') }}
+    {{ Session::get('success') }}
 </div>
 @endif

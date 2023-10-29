@@ -15,6 +15,7 @@
                 <div class="user-name">by <a href="{{ route('users.show', $answer->user->id)}}">{{ $answer->user->name
                         }}</a></div>
                 <hr>
+                @if ($answer->user->id === auth()->user()->id)
                 <div style="display: flex; align-items: center; justify-content: center; flex-direction:column">
                     <a href="{{ route('answers.edit', $answer->id ) }}">Edit Your Answer</a>
                     <form action="{{ route('answers.destroy', $answer->id ) }}" method="post">
@@ -23,6 +24,7 @@
                         <button type="submit">delete your answer</button>
                     </form>
                 </div>
+                @endif
             </div>
         </div>
         @endforeach

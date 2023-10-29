@@ -1,12 +1,14 @@
 @extends('layouts.layout')
 
+@include('components.messages')
+
 @section('content')
 <section id="banner">
     <div class="container">
         <h1>Question</h1>
     </div>
 </section>
-@include('components.messages')
+
 @if($question->id)
 <section id="question">
     <div class="container">
